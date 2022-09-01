@@ -15,6 +15,11 @@ class SvgStringInput extends React.Component {
     onChange: PropTypes.func,
   };
 
+  generateId() {
+    const title = this.props.type.title.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => index == 0 ? word.toLowerCase() : word.toUpperCase()).replace(/\s+/g, '')
+    return `svg-upload--${this.props.parent._key}--${title}`
+  }
+
   handleChange = event => {
     const file = event.target.files[0];
     if (file.type !== 'image/svg+xml') {
@@ -42,13 +47,14 @@ class SvgStringInput extends React.Component {
 
   render() {
     const { value, type, level } = this.props;
+    const id = this.generateId();
 
     return (
       <FormField label={type.title} level={level} description={type.description}>
         <div className={`${styles.svgPreviewBackground} ${value && styles.hasValue}`}>
           <input
             accept=".svg"
-            id="svg-upload"
+            id={id}
             ref={this.inputRef}
             type="file"
             placeholder={type.placeholder}
@@ -56,7 +62,7 @@ class SvgStringInput extends React.Component {
             name="svg_upload"
             onSubmit={this.onSubmit}
           />
-          <label htmlFor="svg-upload">Upload SVG</label>
+          <label htmlFor={id}>Upload SVG</label>
 
           {value && (
             <div className={styles.svgWrapper}>
