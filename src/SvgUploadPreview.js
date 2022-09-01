@@ -17,7 +17,7 @@ class SvgStringInput extends React.Component {
 
   generateId() {
     const title = this.props.type.title.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => index == 0 ? word.toLowerCase() : word.toUpperCase()).replace(/\s+/g, '')
-    return `svg-upload--${this.props.parent._key}--${title}`
+    return `svg-upload--${this?.props?.parent?._key || Math.random().toString()}--${title}`
   }
 
   handleChange = event => {
