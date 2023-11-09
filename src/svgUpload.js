@@ -1,9 +1,12 @@
 import React from 'react';
 import SvgUploadPreview from './SvgUploadPreview';
+import {definePlugin} from 'sanity'
 
-export default {
+const svgUploadPreview = definePlugin({
   title: 'Svg Upload Inline Preview',
   name: 'svgUploadPreview',
   type: 'string',
-  inputComponent: SvgUploadPreview,
-};
+  inputComponent: SvgUploadPreview
+});
+
+export default svgUploadPreview;
